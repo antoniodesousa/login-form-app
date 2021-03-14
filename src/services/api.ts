@@ -8,7 +8,7 @@ export const get = async (url: string, config?: AxiosRequestConfig): Promise<any
 		return await axios.get(url, config);
 	}
 	catch (error) {
-		console.log(error);
+		return error;
 	}
 };
 
@@ -17,6 +17,6 @@ export const post = async (url: string, data?: any, config?: AxiosRequestConfig)
 		return await axios.post(url, data, config);
 	}
 	catch (error) {
-		console.log(error);
+		return error;
 	}
 };
