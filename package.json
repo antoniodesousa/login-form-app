@@ -1,7 +1,9 @@
 {
   "name": "login-form-app",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "author": "Antonio de Sousa <antoniojsba@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.4",
