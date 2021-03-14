@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
-import './App.less';
+import { getUsers, postUser } from '../services/resources';
+import { LoginForm } from './LoginForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const onSubmit = async (values: any) => {
+		const response = await postUser(values);
+
+		if (response.status === 200) {
+			setTimeout(async () => {
+				const users = await getUsers();
+				console.log('getUsers:', users);
+			}, 4000);
+		}
+	};
+
+	return (
+		<div className={'main'}>
+			<LoginForm onSubmit={onSubmit}/>
+		</div>
+	);
 }
 
 export default App;
