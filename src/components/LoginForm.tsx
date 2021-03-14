@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import { IUserData } from '../services/interfaces';
 import { passwordValidator } from '../validators/password-validator';
@@ -9,15 +9,28 @@ interface ILoginForm {
 
 function LoginForm(props: ILoginForm) {
 	const { onSubmit } = props;
+	const [form] = Form.useForm();
+	const [disabled, setDisabled] = useState(true);
+
+	const onFieldsChange = () => {
+		const fieldsError = form.getFieldsError();
+		const isFieldsTouched = form.isFieldsTouched(true);
+
+		setDisabled(() => {
+			return fieldsError.some((field) => field.errors.length > 0) || !isFieldsTouched;
+		});
+	}
 
 	return (
 		<Form
 			name="login"
+			form={form}
 			className={'login-form'}
 			labelCol={{ span: 5 }}
 			wrapperCol={{ span: 18 }}
 			initialValues={{ remember: false }}
 			onFinish={onSubmit}
+			onFieldsChange={onFieldsChange}
 		>
 			<Form.Item
 				label="First name"
@@ -89,7 +102,11 @@ function LoginForm(props: ILoginForm) {
 			</Form.Item>
 
 			<Form.Item wrapperCol={{ span: 23 }} style={{textAlign: 'right'}}>
-				<Button type="primary" htmlType="submit">Submit</Button>
+				<Button type="primary"
+				        htmlType="submit"
+				        disabled={disabled}>
+					Submit
+				</Button>
 			</Form.Item>
 		</Form>
 	);
