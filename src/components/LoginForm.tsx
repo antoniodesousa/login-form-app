@@ -5,12 +5,18 @@ import { passwordValidator } from '../validators/password-validator';
 
 interface ILoginForm {
 	onSubmit: (values: IUserData) => void;
+	loading: boolean;
 }
 
 function LoginForm(props: ILoginForm) {
-	const { onSubmit } = props;
+	const { onSubmit, loading } = props;
 	const [form] = Form.useForm();
 	const [disabled, setDisabled] = useState(true);
+
+	const resetFields = () => {
+		form.resetFields();
+		setDisabled(true);
+	};
 
 	const onFieldsChange = () => {
 		const fieldsError = form.getFieldsError();
@@ -42,7 +48,7 @@ function LoginForm(props: ILoginForm) {
 					}
 				]}
 			>
-				<Input/>
+				<Input disabled={loading}/>
 			</Form.Item>
 
 			<Form.Item
@@ -55,7 +61,7 @@ function LoginForm(props: ILoginForm) {
 					}
 				]}
 			>
-				<Input/>
+				<Input disabled={loading}/>
 			</Form.Item>
 
 			<Form.Item
@@ -72,7 +78,7 @@ function LoginForm(props: ILoginForm) {
 					}
 				]}
 			>
-				<Input/>
+				<Input disabled={loading}/>
 			</Form.Item>
 
 			<Form.Item
@@ -98,12 +104,18 @@ function LoginForm(props: ILoginForm) {
 					passwordValidator
 				]}
 			>
-				<Input.Password/>
+				<Input.Password disabled={loading}/>
 			</Form.Item>
 
-			<Form.Item wrapperCol={{ span: 23 }} style={{textAlign: 'right'}}>
+			<Form.Item className={'login-actions'} wrapperCol={{ span: 23 }}>
+				<Button type="default"
+				        onClick={resetFields}
+				        disabled={loading}>
+					Reset
+				</Button>
 				<Button type="primary"
 				        htmlType="submit"
+				        loading={loading}
 				        disabled={disabled}>
 					Submit
 				</Button>
