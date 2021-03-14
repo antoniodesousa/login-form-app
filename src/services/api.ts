@@ -8,7 +8,7 @@ export const get = async (url: string, config?: AxiosRequestConfig): Promise<any
 		return await axios.get(url, config);
 	}
 	catch (error) {
-		return error;
+		return { data: error };
 	}
 };
 
