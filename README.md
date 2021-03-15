@@ -36,7 +36,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn run test:coverage`
 
-Creates a test coverage fo the whole application.
+Creates a test coverage of the whole application.
 
 ### `yarn run build`
 
