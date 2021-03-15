@@ -15,7 +15,7 @@ A simple app that shows a list of commits in a Github repository.
 - GET from https://demo-api.now.sh/users
 
 ## Building
-To build the project, clone the repo to your local machine and in the terminal run `npm install`.
+To build the project, clone the repo to your local machine and in the terminal run `yarn`.
 
 ## Available Scripts
 
